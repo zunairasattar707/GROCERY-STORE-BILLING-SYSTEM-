@@ -1,0 +1,100 @@
+
+# Welcome message
+print("\t\t\t\t\t WELCOME_TO_THE_ZUNAIRA'S_STORE ")
+
+# Product details
+products = {
+    "apple": {"price": 10, "quantity": 100, "category": "fruit", "description": "Fresh apple"},
+    "banana": {"price": 5, "quantity": 50, "category": "fruit", "description": "Fresh banana"},
+    "orange": {"price": 7, "quantity": 75, "category": "fruit", "description": "Fresh orange"},
+    # Add more products here...
+}
+
+# Customer details
+customers = {}
+
+# Order details
+orders = {}
+
+# Function to display products
+def display_products():
+    print("Available Products:")
+    for product, details in products.items():
+        print(f"Name: {product}")
+        print(f"Price: ${details['price']:.2f}")
+        print(f"Quantity: {details['quantity']}")
+        print(f"Category: {details['category']}")
+        print(f"Description: {details['description']}")
+        print("--------------------")
+
+# Function to add customer
+def add_customer():
+    name = input("Enter customer name: ")
+    address = input("Enter customer address: ")
+    phone = input("Enter customer phone number: ")
+    email = input("Enter customer email: ")
+    customers[name] = {"name": name, "address": address, "phone": phone, "email": email}
+    print("Customer added successfully!")
+
+# Function to place order
+def place_order():
+    customer_name = input("Enter customer name: ")
+    if customer_name in customers:
+        product_name = input("Enter product name: ")
+        if product_name in products:
+            quantity = int(input("Enter quantity: "))
+            if quantity <= products[product_name]["quantity"]:
+                total_cost = quantity * products[product_name]["price"]
+                order_id = len(orders) + 1
+                orders[order_id] = {"customer_name": customer_name, "product_name": product_name, "quantity": quantity, "total_cost": total_cost}
+                print("Order placed successfully!")
+                print(f"Order ID: {order_id}")
+                print(f"Customer Name: {customer_name}")
+                print(f"Product Name: {product_name}")
+                print(f"Quantity: {quantity}")
+                print(f"Total Cost: ${total_cost:.2f}")
+            else:
+                print("Sorry, we don't have enough quantity of this product.")
+        else:
+            print("Sorry, we don't have this product.")
+    else:
+        print("Sorry, customer not found.")
+
+# Function to display orders
+def display_orders():
+    print("Orders:")
+    for order_id, order_details in orders.items():
+        print(f"Order ID: {order_id}")
+        print(f"Customer Name: {order_details['customer_name']}")
+        print(f"Product Name: {order_details['product_name']}")
+        print(f"Quantity: {order_details['quantity']}")
+        print(f"Total Cost: ${order_details['total_cost']:.2f}")
+        print("--------------------")
+
+# Main function
+def main():
+    while True:
+        print("\nStore Management System")
+        print("1. Display Products")
+        print("2. Add Customer")
+        print("3. Place Order")
+        print("4. Display Orders")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            display_products()
+        elif choice == "2":
+            add_customer()
+        elif choice == "3":
+            place_order()
+        elif choice == "4":
+            display_orders()
+        elif choice == "5":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
+
+
